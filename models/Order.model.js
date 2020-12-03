@@ -20,10 +20,12 @@ Order.getById = async (shopId,sellerId,orderId,result) => {
 	}
 	else if(typeof sellerId == 'undefined'){
 		//shops/:id/orders/:id
+		console.log('plop')
 		query = `SELECT DISTINCT o.reference, CONCAT(c.firstname,' ',c.lastname) as clientName ,a.phone ,pdc.hour ,s.name as sellerName, l.name as driveName 
 				FROM ps_order_state_lang osl, ps_customer c,ps_prestatill_drive_creneau pdc,ps_store_lang l, 
 					 ps_address a,ps_orders o,ps_seller s,ps_seller_order so 
-				WHERE c.id_customer = a.id_customer 
+				WHERE c.id_customer = a.id_customer
+				AND o.id_customer = c.id_customer 
 				AND s.id_seller = so.id_seller 
 				AND s.id_shop = ${shopId} 
 				AND o.current_state != 6
@@ -42,7 +44,7 @@ Order.getById = async (shopId,sellerId,orderId,result) => {
 				WHERE s.id_seller = p.id_seller_product 
 				AND o.current_state != 6
 				AND o.current_state != 5 
-				AND  o.id_order = d.id_order 
+				AND o.id_order = d.id_order 
 				AND p.id_product = d.product_id 
 				AND c.id_customer = o.id_customer 
 				AND reference LIKE "%${orderId}%" 
