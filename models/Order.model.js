@@ -26,7 +26,8 @@ Order.getById = async (shopId,sellerId,orderId,result) => {
 				WHERE c.id_customer = a.id_customer 
 				AND s.id_seller = so.id_seller 
 				AND s.id_shop = ${shopId} 
-				AND o.current_state != 6 
+				AND o.current_state != 6
+				AND o.current_state != 5 
 				AND so.id_order = o.id_order 
 				AND pdc.id_order = o.id_order 
 				AND pdc.id_store = l.id_store 
@@ -39,7 +40,8 @@ Order.getById = async (shopId,sellerId,orderId,result) => {
 		query = `SELECT DISTINCT reference, CONCAT(c.firstname,' ',c.lastname) as clientName ,product_name,product_quantity 
 				FROM ps_order_detail d,ps_seller_product p, ps_orders o, ps_seller s,ps_customer c 
 				WHERE s.id_seller = p.id_seller_product 
-				AND o.current_state != 6 
+				AND o.current_state != 6
+				AND o.current_state != 5 
 				AND  o.id_order = d.id_order 
 				AND p.id_product = d.product_id 
 				AND c.id_customer = o.id_customer 

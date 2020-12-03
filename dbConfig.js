@@ -5,6 +5,7 @@ const host = global.env.DB_HOST;
 const user = global.env.DB_USER;
 const password = global.env.DB_PASS;
 const database = global.env.DB_DATABASE;
-const config = {host, user, password, database};
+const mongo = global.env.MONGODB;
+const config = {host, user, password, database,mongo};
 
 module.exports = config

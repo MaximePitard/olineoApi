@@ -6,9 +6,14 @@ const Seller = function(seller){}
 
 Seller.getById = async (shopId,sellerId,result) => {
 	if(typeof shopId == 'undefined'){
-		query = `SELECT ps_seller.* FROM ps_seller WHERE ps_seller.id_seller = ${sellerId}`
+		query = `SELECT ps_seller.* 
+				 FROM ps_seller 
+				 WHERE ps_seller.id_seller = ${sellerId}`
 	}else{
-		query = `SELECT ps_seller.* FROM ps_seller WHERE ps_seller.id_seller = ${sellerId} AND ps_seller.id_shop = ${shopId}`;
+		query = `SELECT ps_seller.* 
+				 FROM ps_seller 
+				 WHERE ps_seller.id_seller = ${sellerId} 
+				 AND ps_seller.id_shop = ${shopId}`;
 	}
 	res = await db.query(query);
 	result(null,res)
@@ -16,11 +21,14 @@ Seller.getById = async (shopId,sellerId,result) => {
   
 Seller.getAll = async (shopId,result) => {
 	if(typeof shopId == 'undefined'){
-		query = `SELECT ps_seller.* FROM ps_seller`;
+		query = `SELECT ps_seller.* 
+				 FROM ps_seller`;
 
 	}
 	else{
-		query = `SELECT ps_seller.* FROM ps_seller WHERE ps_seller.id_shop = ${shopId}`;
+		query = `SELECT ps_seller.* 
+				 FROM ps_seller 
+				 WHERE ps_seller.id_shop = ${shopId}`;
 	}
 	res = await db.query(query);
 	result(null,res)

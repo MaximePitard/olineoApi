@@ -4,15 +4,17 @@ const express = require('express'),
 
 authRouter = express.Router();
 
-authRouter.get('/login', (req, res) => {
-    res.json('Login')
-})
+// authRouter.get('/login', (req, res) => {
+//     res.json('Login')
+// })
 
-authRouter.get('/register', auth.authenticate(), (req, res) => {
-    res.json('Register')
-})
+// authRouter.get('/register', auth.authenticate(), (req, res) => {
+//     res.json('Register')
+// })
 
 authRouter.post("/login", authController.login)
-authRouter.post("/register", authController.register)
+authRouter.post("/register", auth.authenticate(), authController.register)
 
 module.exports = authRouter;
+
+

@@ -12,6 +12,7 @@ const express = require('express'),
     User = require('./models/User.model.js'),
     localStrategy = require('passport-local'),
     auth = require('./middleware/auth.js')();
+const dbConfig = require('./dbConfig');
 app.use(cors());
 
 
@@ -19,7 +20,7 @@ app.use(cors());
 * Connection to the users MongoDB DataBase
 *
 */
-mongoose.connect('mongodb+srv://devillal:wUatGQxB99DneSGn@clustertest.ozh5e.mongodb.net/<dbname>?retryWrites=true&w=majority' 
+mongoose.connect(dbConfig.mongo 
 , {
     useNewUrlParser: true,
     useUnifiedTopology: true })
