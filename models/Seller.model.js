@@ -33,4 +33,11 @@ Seller.getAll = async (shopId,result) => {
 	res = await db.query(query);
 	result(null,res)
 }
+
+Seller.getInvoice = async (start_date,end_date) => {
+	
+}
+
+
+
 module.exports = Seller

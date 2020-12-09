@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
   passportLocalMongoose = require('passport-local-mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true },

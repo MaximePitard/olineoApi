@@ -57,7 +57,7 @@ passport.deserializeUser(User.deserializeUser());
 * Configure Routers
 *
 */
-app.use('/shops', auth.authenticate(), shopRouter);
+app.use('/shops', /*auth.authenticate(),*/ shopRouter);
 app.use('/sellers', auth.authenticate(), sellerRouter);
 app.use('/orders', auth.authenticate(), orderRouter);
 //app.use('/users', usersRouter); /* Voir l'utilité pour le projet */

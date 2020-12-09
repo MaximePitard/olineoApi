@@ -12,4 +12,6 @@ exports.findOne = (req, res) => {
 		res.json(data);
 	})
 }
- 
+exports.getInvoice = (req,res) => {
+	
+ }
