@@ -5,14 +5,15 @@ const express = require('express'),
     shopRouter = require("./routes/shopRouter.js"),
     sellerRouter = require("./routes/sellerRouter.js"),
     orderRouter = require("./routes/orderRouter.js"),
-    usersRouter = require("./routes/usersRouter.js"),
+    invoiceRouter = require("./routes/invoiceRouter.js"),
+    //usersRouter = require("./routes/usersRouter.js"),
     authRouter = require("./routes/authRouter.js"),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     User = require('./models/User.model.js'),
     localStrategy = require('passport-local'),
     auth = require('./middleware/auth.js')();
-const dbConfig = require('./dbConfig');
+const config = require('./config.js');
 app.use(cors());
 
 
@@ -20,7 +21,7 @@ app.use(cors());
 * Connection to the users MongoDB DataBase
 *
 */
-mongoose.connect(dbConfig.mongo 
+mongoose.connect(config.mongo 
 , {
     useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -57,10 +58,10 @@ passport.deserializeUser(User.deserializeUser());
 * Configure Routers
 *
 */
-app.use('/shops', /*auth.authenticate(),*/ shopRouter);
+app.use('/shops', auth.authenticate(), shopRouter);
 app.use('/sellers', auth.authenticate(), sellerRouter);
 app.use('/orders', auth.authenticate(), orderRouter);
-//app.use('/users', usersRouter); /* Voir l'utilité pour le projet */
+app.use('/invoice', auth.authenticate(), invoiceRouter);
 app.use('/', authRouter);
 
 module.exports = app;

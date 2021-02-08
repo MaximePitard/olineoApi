@@ -15,7 +15,7 @@ exports.login = function (req, res) {
             var payload = {
                 _id: user._id,
                 role: user.role,
-                expire: Date.now() + 1000 * 60 * 60 * 24 * 7, //7 days
+                expire: Date.now() + 1000 * 60 * 60 * 24 * 365, //365 days
                 };
             var token = jwt.sign(payload, config.jwtSecret);
             res.json({ token: token, role: user.role, id: user.sellerId});
@@ -32,6 +32,7 @@ exports.register = function (req, res) {
         password: req.body.password,
         role: req.body.role,
         sellerId: req.body.sellerId,
+        transactionId:req.body.transactionId
       });
 
     User.createUser(newUser, function(err, User){

@@ -1,5 +1,4 @@
-const db = require("../db.js")
-const dbConfig = require('../dbConfig');
+const db = require("../db.js");
 
 //constructor
 const Shop = function(shop){}

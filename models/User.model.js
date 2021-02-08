@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  sellerId: { type: String, required: false },
+  transactionId: {type: String, required:true},
+  sellerId: { type: String, required: false }
 });
 
 userSchema.plugin(passportLocalMongoose);
