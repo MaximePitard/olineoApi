@@ -32,7 +32,8 @@ exports.register = function (req, res) {
         password: req.body.password,
         role: req.body.role,
         sellerId: req.body.sellerId,
-        transactionId:req.body.transactionId
+        address:req.body.address,
+        name:req.body.name
       });
 
     User.createUser(newUser, function(err, User){
