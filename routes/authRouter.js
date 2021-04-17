@@ -14,7 +14,9 @@ authRouter = express.Router();
 
 authRouter.post("/login", authController.login)
 authRouter.post("/register", auth.authenticate(), authController.register)
-
+authRouter.get('/ping', (req, res) => {
+  res.send('pong')
+})
 module.exports = authRouter;
 
 

@@ -99,22 +99,22 @@ Invoice.getAccount = async (sellerId) => {
 Invoice.getSoldProducts = async (sellerId,start_date,end_date,result) => {
 	query = `
 	SELECT 	total.nom, 
-			total.quantité, 
+			total.quantite, 
 			total.prix_ht, 
 			total.tva, 
 			total.prix_ttc, 
-			total.réductions_appliquées, 
-			total.commission_prélevée, 
+			total.reductions_appliquees, 
+			total.commission_prelevee, 
 			DATE_FORMAT(total.date_add, "%d-%m-%Y %k:%i") date_de_vente 
 	FROM
 		(SELECT DISTINCT
 				sod.product_name nom,
-				sod.product_quantity quantité,
-				REPLACE(sod.total_price_tax_excl, '.', ',') prix_ht,
-				REPLACE(sod.tax_rate, '.', ',')  tva, 
-				REPLACE(sod.total_price_tax_incl, '.', ',') prix_ttc,
-				REPLACE(sod.reduction_amount, '.', ',') réductions_appliquées,
-				REPLACE(sod.total_price_tax_incl - sod.total_commission_tax_incl, '.', ',') commission_prélevée,
+				sod.product_quantity quantite,
+				sod.total_price_tax_excl prix_ht,
+				sod.tax_rate  tva, 
+				sod.total_price_tax_incl prix_ttc,
+				sod.reduction_amount reductions_appliquees,
+				sod.total_price_tax_incl - sod.total_commission_tax_incl commission_prelevee,
 				so.date_add date_add
 				FROM ps_seller_order_detail sod, ps_seller_order so
 				WHERE so.id_seller_order = sod.id_seller_order
@@ -125,12 +125,12 @@ Invoice.getSoldProducts = async (sellerId,start_date,end_date,result) => {
 		UNION
 		SELECT DISTINCT
 				sod.product_name nom,
-				sod.product_quantity quantité,
-				REPLACE(sod.total_price_tax_excl, '.', ',') prix_ht,
-				REPLACE(sod.tax_rate, '.', ',')  tva, 
-				REPLACE(sod.total_price_tax_incl, '.', ',') prix_ttc,
-				REPLACE(sod.reduction_amount, '.', ',') réductions_appliquées,
-				REPLACE(sod.total_price_tax_incl - sod.total_commission_tax_incl - sod.reduction_amount, '.', ',') commission_prélevée,
+				sod.product_quantity quantite,
+				sod.total_price_tax_excl prix_ht,
+				sod.tax_rate  tva, 
+				sod.total_price_tax_incl prix_ttc,
+				sod.reduction_amount reductions_appliquees,
+				sod.total_price_tax_incl - sod.total_commission_tax_incl - sod.reduction_amount commission_prelevee,
 				so.date_add date_add
 				FROM ps_seller_order_detail sod, ps_seller_order so
 				WHERE
@@ -143,12 +143,12 @@ Invoice.getSoldProducts = async (sellerId,start_date,end_date,result) => {
 		UNION
 		SELECT DISTINCT
 				sod.product_name nom,
-				sod.product_quantity quantité,
-				REPLACE(sod.total_price_tax_excl, '.', ',') prix_ht,
-				REPLACE(sod.tax_rate, '.', ',')  tva, 
-				REPLACE(sod.total_price_tax_incl, '.', ',') prix_ttc,
-				REPLACE(sod.total_price_tax_incl - sod.reduction_amount - sod.total_commission_tax_incl, '.', ',') réductions_appliquées,
-				REPLACE(sod.reduction_amount, '.', ',') commission_prélevée,
+				sod.product_quantity quantite,
+				sod.total_price_tax_excl prix_ht,
+				sod.tax_rate  tva, 
+				sod.total_price_tax_incl prix_ttc,
+				sod.total_price_tax_incl - sod.reduction_amount - sod.total_commission_tax_incl reductions_appliquees,
+				sod.reduction_amount commission_prelevee,
 				so.date_add date_add
 				FROM ps_seller_order_detail sod, ps_seller_order so
 				WHERE
