@@ -39,7 +39,6 @@ Invoice.getTotal = async (accountId,start_date,end_date) => {
 				AND sp.id_seller = so.id_seller
 				AND sp.account ='${accountId}'
 				AND so.id_shop != 3
-				AND so.ref_transfer_stripe != ''
 				AND so.date_add BETWEEN '${start_date}' AND '${end_date}' 
 				group by sp.account
 		UNION
@@ -54,7 +53,6 @@ Invoice.getTotal = async (accountId,start_date,end_date) => {
 				AND sp.id_seller = so.id_seller
 				AND sp.account ='${accountId}'
 				AND so.id_shop != 3
-				AND so.ref_transfer_stripe != ''
 				AND so.date_add BETWEEN '${start_date}' AND '2021-02-16 23:59:59'
 				AND so.date_add BETWEEN '${start_date}' AND '${end_date}' 
 				group by sp.account
@@ -70,7 +68,6 @@ Invoice.getTotal = async (accountId,start_date,end_date) => {
 				AND sp.id_seller = so.id_seller
 				AND sp.account ='${accountId}'
 				AND so.id_shop != 3
-				AND so.ref_transfer_stripe != ''
 				AND so.date_add BETWEEN '2021-02-17 00:00:00' AND '${end_date}'
 				AND so.date_add BETWEEN '${start_date}' AND '${end_date}' 
 				group by sp.account
