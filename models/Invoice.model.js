@@ -9,9 +9,10 @@ const Invoice = function(invoice){}
 
 
 Invoice.getById = async (id,start_date,end_date,result) => {
+	
 	account = await Invoice.getAccount(id)
 	total = await Invoice.getTotal(account,start_date,end_date)
-	let user = await User.findOne({sellerId:id}, 'address name').exec();
+	user = await User.findOne({sellerId:id}, 'address name').exec();
 	result({
 		account:total.stripe,
 		name:user.name,

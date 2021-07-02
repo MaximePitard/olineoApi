@@ -26,3 +26,8 @@ exports.getAllInvoices = async (req,res) => {
 		})
 	})
 }
+exports.getAccounts = async (req,res) => {
+	Invoice.getAllAccounts(req.body.start_date,req.body.end_date,(accounts) =>{
+		res.json(accounts)
+	})
+}
